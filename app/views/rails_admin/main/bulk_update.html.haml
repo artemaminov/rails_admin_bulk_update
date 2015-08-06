@@ -1,0 +1,30 @@
+#rails_admin_bulk_update
+  %table.table.table-condensed.table-striped#rails_admin_bulk_update
+    %thead
+      %tr
+        %th.header.col-sm-3
+          Наименование
+        %th.header.col-sm-5
+          Информация
+        %th.header.col-sm-2
+          Действует до
+        %th.header.col-sm-2
+          Относится к строению
+    %tbody
+      - @offers.each do |offer|
+        %tr{ class: "#{@abstract_model.param_key}_row" }
+          %td
+            %input.form-control{ name: "offers[#{offer.id}][title]", value: offer.title }
+          %td
+            %textarea.form-control{ name: "offers[#{offer.id}][info]", rows: 6 }= offer.info
+          %td
+            %input.form-control.hasDatepicker{ name: "offers[#{offer.id}][till]", type: 'text', value: offer.till, data: { datetimepicker: 'true' } }
+          %td
+            %select.form-control{ name: "offers[#{offer.id}][block_id]", value: offer.block_id }
+              - @blocks.each do |block|
+                %option{ value: block.id, selected: offer.block_id == block.id ? true : false }= block.title
+
+  .form-actions
+    %button{ :type => 'submit', :class => 'btn btn-small btn-primary' }= t('admin.actions.nestable.update')
+
+= javascript_include_tag 'rails_admin/rails_admin_bulk_update'
