@@ -26,10 +26,9 @@ module RailsAdmin
         register_instance_option :controller do
           proc do
             @offers = @abstract_model.all
-            @blocks = Block.all
             respond_to do |format|
               format.js {
-                render text: :ok
+                render 'bulk_update_error' unless Offer.update(params[:offer].keys, params[:offer].values)
               }
               format.html
             end

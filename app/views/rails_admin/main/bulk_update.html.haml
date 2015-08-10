@@ -1,30 +1,30 @@
 #rails_admin_bulk_update
-  %table.table.table-condensed.table-striped#rails_admin_bulk_update
-    %thead
-      %tr
-        %th.header.col-sm-3
-          Наименование
-        %th.header.col-sm-5
-          Информация
-        %th.header.col-sm-2
-          Действует до
-        %th.header.col-sm-2
-          Относится к строению
-    %tbody
-      - @offers.each do |offer|
-        %tr{ class: "#{@abstract_model.param_key}_row" }
-          %td
-            %input.form-control{ name: "offers[#{offer.id}][title]", value: offer.title }
-          %td
-            %textarea.form-control{ name: "offers[#{offer.id}][info]", rows: 6 }= offer.info
-          %td
-            %input.form-control.hasDatepicker{ name: "offers[#{offer.id}][till]", type: 'text', value: offer.till, data: { datetimepicker: 'true' } }
-          %td
-            %select.form-control{ name: "offers[#{offer.id}][block_id]", value: offer.block_id }
-              - @blocks.each do |block|
-                %option{ value: block.id, selected: offer.block_id == block.id ? true : false }= block.title
+  = rails_admin_form_for :offer, { remote: true } do |form|
+    %table.table.table-condensed.table-striped#rails_admin_bulk_update
+      %thead
+        %tr
+          %th.header.col-sm-3
+            Наименование
+          %th.header.col-sm-5
+            Информация
+          %th.header.col-sm-2
+            Действует до
+          %th.header.col-sm-2
+            Относится к строению
+      %tbody
+        - @offers.each do |offer|
+          = fields_for 'offer[]', offer do |offer_fields|
+            %tr{ class: "#{@abstract_model.param_key}_row" }
+              %td
+                = offer_fields.text_field :title, class: 'form-control'
+              %td
+                = offer_fields.text_area :info, class: 'form-control', rows: 6
+              %td
+                = offer_fields.text_field :till, { class: 'form-control' }
+              %td
+                = offer_fields.select :block_id, Block.all.collect { |b| [ b.title, b.id ] }, {}, {                class: 'form-control'}
 
-  .form-actions
-    %button{ :type => 'submit', :class => 'btn btn-small btn-primary' }= t('admin.actions.nestable.update')
+    .form-actions
+      = form.submit t('admin.form.save'), class: 'btn btn-small btn-primary'
 
-= javascript_include_tag 'rails_admin/rails_admin_bulk_update'
+  = javascript_include_tag 'rails_admin/rails_admin_bulk_update'

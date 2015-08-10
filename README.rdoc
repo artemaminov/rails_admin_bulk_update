@@ -1,3 +1,6 @@
 = RailsAdminBulkUpdate
 
+It's very specific version of bulk update
+You can't use it without hardcoded model "Offer" or as a guide to create your own specific
+
 This project rocks and uses MIT-LICENSE.
