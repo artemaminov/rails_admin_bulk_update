@@ -9,12 +9,13 @@ Gem::Specification.new do |s|
   s.version     = RailsAdminBulkUpdate::VERSION
   s.authors     = ["Artem Aminov"]
   s.email       = ["artemaminov@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of RailsAdminBulkUpdate."
-  s.description = "TODO: Description of RailsAdminBulkUpdate."
+  s.homepage    = "spaceheads.ru"
+  s.summary     = "It's very specific version of bulk update You can't use it without hardcoded model “Offer” or as a guide to create your own specific"
+  s.description = s.summary
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 4.2.0"
+  s.add_dependency "rails_admin", "~> 0.6.6"
 end
