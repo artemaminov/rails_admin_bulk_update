@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = RailsAdminBulkUpdate::VERSION
   s.authors     = ["Artem Aminov"]
   s.email       = ["artemaminov@gmail.com"]
-  s.homepage    = "spaceheads.ru"
+  s.homepage    = "http://www.spaceheads.ru"
   s.summary     = "It's very specific version of bulk update You can't use it without hardcoded model “Offer” or as a guide to create your own specific"
   s.description = s.summary
   s.license     = "MIT"
